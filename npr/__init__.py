@@ -302,10 +302,12 @@ class Search(Api):
         for item in self.response['items']:
             image = ''
             credit = ''
+            logo = ''
             if 'affiliationMeta' in item['attributes']: #this is a podcast
                 agg = item['attributes']['affiliation']
                 title = item['attributes']['affiliationMeta']['title']
-                logo = item['links']['image'][0]['href']
+                if ('image' in item):
+                    logo = item['links']['image'][0]['href']
                 episodes = []
                 for jsonBlock in item['items']:
                     episodes.append(self.defineAssets(jsonBlock))
